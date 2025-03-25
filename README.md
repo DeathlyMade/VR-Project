@@ -265,7 +265,7 @@ This project focuses on implementing image segmentation techniques using deep le
 
     In this project, we experimented with different hyperparameters to optimize the performance of U-Net models for image segmentation.
 
-## v. Results
+## Results
 - *Evaluation Metrics*:
   - Accuracy
   - Intersection over Union (IoU)
@@ -289,7 +289,7 @@ As we can see the UNet model works much better than traditional methods
 </p>
 
 
-## vi. Observations and Analysis
+## Observations and Analysis
 - *Traditional methods* work well for simple segmentation tasks but struggle with complex images.
 - *U-Net* outperforms other approaches, providing the highest accuracy and IoU.
 - Challenges include dealing with varying lighting conditions, occlusions and noise, which were addressed using preprocessing techniques.
