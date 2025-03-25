@@ -116,7 +116,7 @@ dataset
 | K-mean clustering | - | 0.554 (mean over 1st 10 images) | 0.414 (mean over 1st 10 images)
 | Otsu's Threshold | - | 0.545 (mean over 1st 10 images)|0.404 (mean over 1st 10 images)
 | Region-growing| - | 0.129 (mean over 1st 10 images) | 0.082 (mean over 1st 10 images)|
-| U-Net Segmentation | 96.64% |91.37% | 95.09% |
+| U-Net Segmentation | 96.03% |90.11% | 94.50% |
 
 ---
 
