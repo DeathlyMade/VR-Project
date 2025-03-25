@@ -23,7 +23,7 @@ https://github.com/sadjadrz/MFSD
 MSFD
 ├── 1
 │   ├── face_crop # face-cropped images of images in MSFD/1/img
-│   ├── face_crop_segmentation # ground truth of segmend face-mask
+│   ├── face_crop_segmentation # ground truth of segmented face-mask
 │   └── img
 └── 2
     └── img
@@ -126,7 +126,7 @@ dataset
 
 For each image here we need to make a feature vector. We chose 2 features:  HoG and local binary patterns. 
 
-Since feature vectors corresponding to images may be of different length, we resize all images and fix the length of individual sub-feature vectors, so that `np.hstack()` can work without interrupts when all individual sub-feature vectors ar combined into one vector for an image. The data used is the dataset. We train an XGBoost model, neural network and SVM, and as observed, the test accuracy of XGBoost is much better. This is attributed to the fact that neural networks need a lot of data to learn.
+Since feature vectors corresponding to images may be of different lengths, we resize all images and fix the length of individual sub-feature vectors, so that `np.hstack()` can work without interrupts when all individual sub-feature vectors are combined into one vector for an image. The data used is the dataset. We train an XGBoost model, neural network and SVM, and as observed, the test accuracy of XGBoost is much better. This is attributed to the fact that neural networks need a lot of data to learn.
 
 ### PART B
 
@@ -192,11 +192,11 @@ This project demonstrates the effectiveness of *CNNs for binary classification* 
 
 3 techniques were used: K-means clustering-based segmentation, Otsu's Thresholding and Region-growing.
 
-For K-means, k=2, one for mask region and another for backround.
+For K-means, k=2, one for mask region and another for background.
 
 Here for the choice of the 2 initial centroids, we use domain knowledge. The images are cropped to face-size which implies that it is higly likely that some region of the mask must be in the center of image. 
 
-So we choose one centoid at center and another at corner.
+So we choose one centroid at center and another at the corner.
 
 <p align="center">
 
@@ -276,7 +276,7 @@ This project focuses on implementing image segmentation techniques using deep le
 |--------|------------|------|------------|
 | U-Net | 0.9603 | 0.9011 | 0.9450 |
 
-As we can see the unet model works much better than traditional methods
+As we can see the UNet model works much better than traditional methods
 
   <p align="center">
   <img src="Result_Images/UNet_prediction_1.png" width="45%" />
@@ -303,11 +303,11 @@ As we can see the unet model works much better than traditional methods
    
 2. Install dependencies that are required by the notebooks
    
-3. Download the dataset from the source specified and put them in required directories
+3. Download the dataset from the source specified and put it in required directories
     
 4. Run the scripts:
 
-   Note: Part A and B, as well as Part C and D are in separate notebooks as seen from the directory structure of the project.
+   Note: Parts A and B, as well as Part C and D are in separate notebooks as seen from the directory structure of the project.
    
    They can be run all at once or one at a time to see partial results.
 
