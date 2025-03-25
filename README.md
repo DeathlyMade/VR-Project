@@ -145,7 +145,7 @@ This project implements a *binary classification* task using a *Convolutional Ne
 
 ### Model Architecture
 A *CNN model* is designed with the following layers:
-1. *Convolutional Layers: Extract spatial features using **ReLU activation*.
+1. *Convolutional Layers*: Extract spatial features using ReLU activation*.
 2. *MaxPooling Layers*: Reduce spatial dimensions to prevent overfitting.
 3. *Flatten Layer*: Converts feature maps into a single vector.
 4. *Fully Connected (Dense) Layer*: Learns classification features.
