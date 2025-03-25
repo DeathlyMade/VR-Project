@@ -1,0 +1,5 @@
+{'optimizer': 'adam', 'learning_rate': 0.001, 'batch_size': 32, 'dropout': 0.5, 'activation': 'sigmoid'}: 0.9511
+{'optimizer': 'adam', 'learning_rate': 0.0001, 'batch_size': 64, 'dropout': 0.3, 'activation': 'sigmoid'}: 0.9316
+{'optimizer': 'rmsprop', 'learning_rate': 0.001, 'batch_size': 32, 'dropout': 0.5, 'activation': 'sigmoid'}: 0.9511
+{'optimizer': 'sgd', 'learning_rate': 0.01, 'batch_size': 64, 'dropout': 0.3, 'activation': 'sigmoid'}: 0.9023
+{'optimizer': 'adam', 'learning_rate': 0.001, 'batch_size': 32, 'dropout': 0.5, 'activation': 'softmax'}: 0.9251
