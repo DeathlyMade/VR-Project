@@ -299,13 +299,14 @@ As we can see the UNet model works much better than traditional methods
 1. Clone the repository:
    bash
    git clone https://github.com/DeathlyMade/VR-Project.git
-   cd VR-PROJECT
+   and then 
+   cd VR-Project
    
-2. Install dependencies that are required by the notebooks
+3. Install dependencies that are required by the notebooks
    
-3. Download the dataset from the source specified and put it in required directories
+4. Download the dataset from the source specified and put it in required directories
     
-4. Run the scripts:
+5. Run the scripts:
 
    Note: Parts A and B, as well as Part C and D are in separate notebooks as seen from the directory structure of the project.
    
