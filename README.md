@@ -45,7 +45,7 @@ dataset
 ## 3. Objectives
 
 ### a. Binary Classification Using Handcrafted Features and ML Classifiers
-1. Extract handcrafted features from facial images (Histogram of Oriented Gradients).
+1. Extract handcrafted features from facial images (Histogram of Oriented Gradients and local binary pattern).
 2. Train and evaluate at least two machine learning classifiers (We use XGBoost, Neural Network and SVM) and compare classifier performances based on accuracy.
 
 ### b. Binary Classification Using CNN
@@ -109,9 +109,9 @@ dataset
 
 | Model | Accuracy (%) | IoU | Dice Score |
 |--------|------------|----|-----------|
-| XGBoost (part a) | 90.76% (80-20 train-test split with augmentations) | - | - |
-| Neural Network (part a)| 89.05% (80-20 train-test split with augmentations) | - | - |
-| SVM (part a)| 92.51% (80-20 train-test split with augmentations) | - | - |
+| XGBoost (part a) | 95.48% (80-20 train-test split with augmentations) | - | - |
+| Neural Network (part a)| 93.69% (80-20 train-test split with augmentations) | - | - |
+| SVM (part a)| 92.88% (80-20 train-test split with augmentations) | - | - |
 | CNN (part b) | 96.74% Test Accuracy (70-15-15 train-validation-test split)| - | - |
 | K-mean clustering | - | 0.554 (mean over 1st 10 images) | 0.414 (mean over 1st 10 images)
 | Otsu's Threshold | - | 0.545 (mean over 1st 10 images)|0.404 (mean over 1st 10 images)
@@ -124,9 +124,9 @@ dataset
 
 ### PART A
 
-For each image here we need to make a feature vector. We choose 5 features: color features, HoG, Edge features, texture featuresand ORB fetaures. 
+For each image here we need to make a feature vector. We chose 2 features:  HoG and local binary patterns. 
 
-**Since feature vector coresponding to images may be of diffrent lentgh, we resize all image and fix the length of individual sub-feature vectors, so that `np.hstack() `can work without interrupts when all individual sub-feature vectors ar combined into one vector for an image. Data used is dataset. We train an XGBoost model as well as a neural network and as observed, the test accuracy of XGBoost is better. This is attributed to the fact that neural networks need a lot of data to learn and here we have 4095 images.
+**Since feature vectors corresponding to images may be of different length, we resize all images and fix the length of individual sub-feature vectors, so that `np.hstack()` can work without interrupts when all individual sub-feature vectors ar combined into one vector for an image. The data used is the dataset. We train an XGBoost model, neural network and SVM, and as observed, the test accuracy of XGBoost is much better. This is attributed to the fact that neural networks need a lot of data to learn.
 
 ### PART B
 
@@ -239,7 +239,7 @@ Both the algorihtms rely on predefined parameters, they do not 'learn' and hence
 
 
 ## i. Introduction
-This project focuses on implementing image segmentation techniques using both traditional region-based methods and deep learning models such as CNN and U-Net. The objective is to segment facial regions accurately and compare the effectiveness of different methodologies.
+This project focuses on implementing image segmentation techniques using both traditional region-based methods and deep learning models, in this case, U-Net. The objective is to segment facial regions accurately and compare the effectiveness of different methodologies.
 
 ## ii. Dataset
 - *Source*: The dataset used consists of cropped facial images with corresponding ground truth masks.
@@ -254,66 +254,17 @@ This project focuses on implementing image segmentation techniques using both tr
 - *K-Means Clustering*: Used to segment regions based on color similarity.
 
 ### *Deep Learning Models (Part D)*
-- *CNN-based Segmentation*: Trained on facial images to predict masks.
 - *U-Net Architecture*: A powerful fully convolutional network trained for pixel-wise classification.
 
 ## iv. Hyperparameters and Experiments
-- *CNN Model*:
-  - Optimizer: Adam
-  - Learning Rate: 0.001
-  - Batch Size: 32
-  - Number of Epochs: 30
-  - Loss Function: Categorical Crossentropy
-
 - *U-Net Model*:
   - Optimizer: Adam
-  - Learning Rate: 0.0001
-  - Batch Size: 16
-  - Number of Epochs: 20
-  - Loss Function: Dice Loss
+  - Learning Rate: 0.0002
+  - Batch Size: 4
+  - Number of Epochs: 30
+  - Loss Function: BCE + Dice Loss
 
-    In this project, we experimented with different hyperparameters to optimize the performance of CNN and U-Net models for image segmentation. Below are the key hyperparameters used:
-
-    1. Learning Rate
-    Value Used: 0.0001
-    
-    Optimizer: Adam (torch.optim.Adam)
-    
-    Reasoning: A small learning rate ensures stable convergence and prevents overshooting the optimal weights.
-    
-    2. Batch Size
-    Value Used: Defined as BATCH_SIZE (used in DataLoaders)
-    
-    Impact: Controls the number of samples processed before updating model weights, affecting training stability and speed.
-    
-    3. Number of Epochs
-    Value Used: 30
-    
-    Training Strategy: The model is trained over 30 iterations to allow convergence without overfitting.
-    
-    4. Optimizer
-    Type: Adam (torch.optim.Adam)
-    
-    Reasoning: Adam is widely used for deep learning tasks due to its adaptive learning rate properties.
-    
-    5. Loss Function
-    Finding: The loss function was not explicitly found in the extracted code.
-    
-    Potential Options: Could be CrossEntropyLoss or Dice Loss for segmentation.
-    
-    
-    6. Activation Functions
-    Finding: ReLU (torch.nn.ReLU) is likely used in CNN layers.
-    
-   
-    
-    Experiments and Variations
-    The learning rate, batch size, and number of epochs can be adjusted for further fine-tuning.
-    
-    Future experiments could explore different loss functions and data augmentation strategies to improve segmentation performance.
-    
-    
-    Different variations of learning rates, optimizers, and batch sizes were tested to fine-tune the models.
+    In this project, we experimented with different hyperparameters to optimize the performance of U-Net models for image segmentation.
 
 ## v. Results
 - *Evaluation Metrics*:
@@ -321,60 +272,45 @@ This project focuses on implementing image segmentation techniques using both tr
   - Intersection over Union (IoU)
   - Dice Similarity Score
 
-  <p align="center">
-  <img src="images/unetpics.png" width="45%" />
-  
-</p>
-
 
 | Model | Accuracy | IoU | Dice Score |
 |--------|------------|------|------------|
-| U-Net | 0.9664 | 0.9137 | 0.9509 |
+| U-Net | 0.9603 | 0.9011 | 0.9450 |
 
 As we can see the unet model works much better than traditional methods
 
-<p align="center">
-  <img src="images/unetresults" width="45%" />
+  <p align="center">
+  <img src="Result_Images/UNet_prediction_1.png" width="45%" />
+  
+</p>
+
+ <p align="center">
+  <img src="Result_Images/UNet_prediction_2.png" width="45%" />
   
 </p>
 
 
 ## vi. Observations and Analysis
 - *Traditional methods* work well for simple segmentation tasks but struggle with complex images.
-- *CNN-based models* improve segmentation but may require extensive data augmentation.
 - *U-Net* outperforms other approaches, providing the highest accuracy and IoU.
-- Challenges include dealing with varying lighting conditions and occlusions, which were addressed using preprocessing techniques and data augmentation.
+- Challenges include dealing with varying lighting conditions, occlusions and noise, which were addressed using preprocessing techniques.
 
 ## 7. How to Run the Code
 ### Setup
 1. Clone the repository:
    bash
    git clone https://github.com/DeathlyMade/VR-Project.git
-   cd VR_PROJECT_1
+   cd VR-PROJECT
    
-2. Install dependencies:
-    
-   bash
-   python -m venv env
-   source env/bin/activate
-   pip install -r requirements.txt
+2. Install dependencies that are required by the notebooks
    
-3. Download the dataet from the source specified and put the 2 repositores dataset and MSFD at same directory level, immediately below repository level. Make directory output, command mkdir output. Final structure must look like :
-    
-   ``` .
-    ├── dataset
-    ├── MSFD
-    ├── output
-    ├── scripts
-    └── images
-
-    ```
-    
-    # Other files like README.md, pdf, etc are not shown in this tree.
+3. Download the dataset from the source specified and put them in required directories
     
 4. Run the scripts:
+
+   Note: Part A and B, as well as Part C and D are in separate notebooks as seen from the directory structure of the project.
    
-   \scripts contains 2 notebooks part_a_b.ipynb and part_c_d.ipynb, which contains scripts for the respective parts. They can be run all at once or one at a time to see partial results.
+   They can be run all at once or one at a time to see partial results.
 
 ---
 
