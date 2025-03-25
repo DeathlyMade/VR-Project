@@ -45,8 +45,8 @@ dataset
 ## 3. Objectives
 
 ### a. Binary Classification Using Handcrafted Features and ML Classifiers
-1. Extract handcrafted features from facial images (e.g., HOG, LBP, SIFT).
-2. Train and evaluate at least two machine learning classifiers (Here we use XGBoost and Neural Network) and compare classifier performances based on accuracy.
+1. Extract handcrafted features from facial images (Histogram of Oriented Gradients).
+2. Train and evaluate at least two machine learning classifiers (We use XGBoost, Neural Network and SVM) and compare classifier performances based on accuracy.
 
 ### b. Binary Classification Using CNN
 1. Design and train a Convolutional Neural Network (CNN) for mask classification.
@@ -54,7 +54,7 @@ dataset
 3. Compare CNN performance with traditional ML classifiers.
 
 ### c. Region Segmentation Using Traditional Techniques
-1. Apply region-based segmentation methods (e.g., thresholding, edge detection) to segment mask regions, visualize and evaluate segmentation results.
+1. Apply region-based segmentation methods (e.g., thresholding, edge detection) to segment mask regions, and visualize and evaluate segmentation results.
 
 ### d. Mask Segmentation Using U-Net
 1. Train a U-Net model to segment the mask regions in facial images.
@@ -109,8 +109,9 @@ dataset
 
 | Model | Accuracy (%) | IoU | Dice Score |
 |--------|------------|----|-----------|
-| XGBoost (part a) | 94.15% (80-20 train-test split) | - | - |
-| Neural Network (part a)| 91.25% (80-20 train-test split) | - | - |
+| XGBoost (part a) | 90.76% (80-20 train-test split with augmentations) | - | - |
+| Neural Network (part a)| 89.05% (80-20 train-test split with augmentations) | - | - |
+| SVM (part a)| 92.51% (80-20 train-test split with augmentations) | - | - |
 | CNN (part b) | 96.74% Test Accuracy (70-15-15 train-validation-test split)| - | - |
 | K-mean clustering | - | 0.554 (mean over 1st 10 images) | 0.414 (mean over 1st 10 images)
 | Otsu's Threshold | - | 0.545 (mean over 1st 10 images)|0.404 (mean over 1st 10 images)
