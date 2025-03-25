@@ -190,7 +190,7 @@ This project demonstrates the effectiveness of *CNNs for binary classification* 
 
 ### PART C
 
-2 techniques used: K-means clustering based segmentation ,Otsu's Thresholding and Region-growing.
+3 techniques were used: K-means clustering-based segmentation, Otsu's Thresholding and Region-growing.
 
 For K-means, k=2, one for mask region and another for backround.
 
@@ -230,7 +230,7 @@ In conclusion:
 | Higher IOU | Lower IOU|
 | Higher Dice Score | Lower Dice Score|
 
-Both the algorihtms rely on predefined parameters, they do not 'learn' and hence fail to generalise over large dataset (poor mean IoU and Dice scores). Computing mean IoU and Dice for K-means over 8500+ images is computationally expensive, moreover it is evident from its performance over random samples that its scores won't be significantly better Otsu Thresholding.
+Both the algorithms rely on predefined parameters, they do not 'learn' and hence fail to generalise over large datasets (poor mean IoU and Dice scores). Computing mean IoU and Dice for K-means over 8500+ images is computationally expensive, moreover, it is evident from its performance over random samples that its scores won't be significantly better Otsu Thresholding.
 
 ---
 
@@ -238,25 +238,24 @@ Both the algorihtms rely on predefined parameters, they do not 'learn' and hence
 ### PART D
 
 
-## i. Introduction
-This project focuses on implementing image segmentation techniques using both traditional region-based methods and deep learning models, in this case, U-Net. The objective is to segment facial regions accurately and compare the effectiveness of different methodologies.
+## Introduction
+This project focuses on implementing image segmentation techniques using deep learning models, in this case, U-Net. The objective is to segment facial regions accurately and compare the results with traditional techniques.
 
-## ii. Dataset
+## Dataset
 - *Source*: The dataset used consists of cropped facial images with corresponding ground truth masks.
 - *Structure*:
   - face_crop/: Contains input images.
   - face_crop_segmented/: Contains ground truth segmentation masks.
   - output/: Stores results from segmentation techniques.
 
-## iii. Methodology
-### *Traditional Segmentation (Part C)*
-- *Region-Based Segmentation*: Methods such as flooding and binary closing were applied.
-- *K-Means Clustering*: Used to segment regions based on color similarity.
+## Implementation
 
-### *Deep Learning Models (Part D)*
+### *Deep Learning Models*
 - *U-Net Architecture*: A powerful fully convolutional network trained for pixel-wise classification.
+- *Custom Loss Function*: We initially used accuracy as a loss function but accuracy is not really a good measure to evaluate performance in segmentation tasks. So, we made a custom loss function which combines the binary cross entropy loss with the Dice Loss.
+- *Threshold*: We decided to keep a threshold of 0.5 for pixel-wise segmentation.
 
-## iv. Hyperparameters and Experiments
+## Hyperparameters and Experiments
 - *U-Net Model*:
   - Optimizer: Adam
   - Learning Rate: 0.0002
