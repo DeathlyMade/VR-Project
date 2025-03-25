@@ -198,17 +198,19 @@ Here for the choice of the 2 initial centroids, we use domain knowledge. The ima
 So we choose one centoid at center and another at corner.
 
 <p align="center">
-    <img src="Part-C/MSFD/1/img/000007.jpg" width="25%" />
-  <img src="Part-C/MSFD/1/face_crop_segmentation/000007_1.jpg" width="25%" />
-  <img src="Part-C/MSFD/1/face_crop_segmentation_kmeans_pred/000007_1.jpg" width="25%" />
+
+  <img src="Result_Images/000007_Ground_Truth.jpg" width="25%" />
+<img src="Result_Images/000007_1.jpg" width="25%" />
+  <img src="Result_Images/000007_1_kmeans.jpg" width="25%" />
 </p>
 [Results from K-means and ground truth mask for MSFD/1/000007.jpg]
 
 
 <p align="center">
-    <img src="Part-C/MSFD/1/img/000007.jpg" width="25%" />
-  <img src="Part-C/MSFD/1/face_crop_segmentation/000007_1.jpg" width="25%" />
-  <img src="Part-C/MSFD/1/face_crop_segmentation_Otsu_pred/000007_1.jpg" width="25%" />
+
+  <img src="Result_Images/000007_Ground_Truth.jpg" width="25%" />
+<img src="Result_Images/000007_1.jpg" width="25%" />
+  <img src="Result_Images/000007_1_Otsu.jpg" width="25%" />
 </p>
 [Results from Otsu and ground truth mask for MSFD/1/000007.jpg]
 <!-- 
