@@ -19,7 +19,7 @@ https://github.com/chandrikadeb7/Face-Mask-Detection/tree/master/dataset
 
 https://github.com/sadjadrz/MFSD
 
-
+```
 MSFD
 ├── 1
 │   ├── face_crop # face-cropped images of images in MSFD/1/img
@@ -33,7 +33,7 @@ MSFD
 dataset
 ├── with_mask # contains images with mask
 └── without_mask # contains images without face-mask
-
+```
 
 ### Structure:
 - *Training Set:* Images used for training the models.
@@ -111,10 +111,10 @@ dataset
 |--------|------------|----|-----------|
 | XGBoost (part a) | 94.15% (80-20 train-test split) | - | - |
 | Neural Network (part a)| 91.25% (80-20 train-test split) | - | - |
-| CNN (part b) | 96.33% Test Accuracy (80-10-10 train-validation-test split)| - | - |
+| CNN (part b) | 96.74% Test Accuracy (70-15-15 train-validation-test split)| - | - |
 | K-mean clustering | - | 0.554 (mean over 1st 10 images) | 0.414 (mean over 1st 10 images)
 | Otsu's Threshold | - | 0.545 (mean over 1st 10 images)|0.404 (mean over 1st 10 images)
-| Region-growing| - | 0.3559 (mean over 1st 10 images) | 0.4798 (mean over 1st 10 images)|
+| Region-growing| - | 0.129 (mean over 1st 10 images) | 0.082 (mean over 1st 10 images)|
 | U-Net Segmentation | 96.64% |91.37% | 95.09% |
 
 ---
@@ -136,24 +136,9 @@ This project implements a *binary classification* task using a *Convolutional Ne
 ---
 
 ### Dataset Preparation
-#### 1. Dataset Splitting
-- The original dataset consists of two classes: with_mask and without_mask. A new dataset dataset_split is created consisting of the subdirectories train,test and val. These 3 further have 2 subdirectories 0 and 1.
-- Images are split into *80% training, 10% validation, and 10% testing*.
-- A script ensures images are valid and copied to their respective directories.
-
-#### 2. Dataset Structure
-
-dataset_split/
-├── train/
-│   ├── 0/  # Masked Images
-│   ├── 1/  # Unmasked Images
-├── val/
-│   ├── 0/  # Masked Images for Validation
-│   ├── 1/  # Unmasked Images for Validation
-├── test/
-│   ├── 0/  # Masked Images for Testing
-│   ├── 1/  # Unmasked Images for Testing
-
+#### Dataset Splitting
+- The original dataset consists of two classes: with_mask and without_mask.
+- Images are split into *70% training, 15% validation, and 15% testing*.
 
 ---
 
@@ -169,9 +154,9 @@ A *CNN model* is designed with the following layers:
 ---
 
 ### Training and Hyperparameter Tuning
-- *Batch Size:* 32/64/96/128 (Best: *64*)
-- *Epochs:* 10/15/20 (Best: *15*)
-- *Optimizer:* Adam
+- *Batch Size:* 32/64
+- *Epochs:* 30 
+- *Optimizer:* Adam / SGD / RMSprop
 - *Loss Function:* Binary Cross-Entropy
 - *Activation Function (Final Layer):* Sigmoid (compared with Softmax, Sigmoid performed better)
 - *Data Augmentation:* Experimented but found that training without augmentation gave better results.
@@ -184,34 +169,27 @@ A *CNN model* is designed with the following layers:
 ---
 
 ### Results & Performance
-- *Test Accuracy:* *96.33%*
-- *Train Accuracy:* ~95.63%
-- *Final Model Saved As:* face_mask_cnn1.keras
-
-### Model Performance Graphs
-The output graphs show:
-- *Model Accuracy:* Training accuracy vs. validation accuracy
-- *Model Loss:* Training loss vs. validation loss
+- *Test Accuracy:* *96.74%*
+- *Final Model Saved As:* best_model_partb.pth
 
 ---
 
 ### Evaluation
 - *The CNN model significantly outperformed ML classifiers.*
-- *Test accuracy (96.33%)* indicates strong generalization.
+- *Test accuracy (96.74%)* indicates strong generalization.
 - *Further improvements:* More hyperparameter tuning, deeper architectures, and additional data preprocessing.
 
----
 
 ---
 
 ## Conclusion
-This project demonstrates the effectiveness of *CNNs for binary classification* in a face mask detection scenario. By tuning hyperparameters and optimizing model architecture, we achieved a high accuracy of *96.33%*, outperforming traditional ML classifiers.
+This project demonstrates the effectiveness of *CNNs for binary classification* in a face mask detection scenario. By tuning hyperparameters and optimizing model architecture, we achieved a high accuracy of *96.74%*, outperforming traditional ML classifiers.
 
 
 
 ### PART C
 
-2 techniques used: K-means clustering based segmentation and Region-growing.
+2 techniques used: K-means clustering based segmentation ,Otsu's Thresholding and Region-growing.
 
 For K-means, k=2, one for mask region and another for backround.
 
@@ -219,49 +197,37 @@ Here for the choice of the 2 initial centroids, we use domain knowledge. The ima
 
 So we choose one centoid at center and another at corner.
 
-For Region-based segmentaion, choice of initial seed here(only one) is center of the image, the 'why' of it backed by the reasoning provided above.
-
-We find that K-means captures all pixels as part of mask that have more or less the intensity as mask. Secondly it is found that if the masks have design patterns of high contast, they are inevitably left out in mask segment no matter how much blurring you apply.
 <p align="center">
-  <img src="images/3_1.png" width="65%" />
-  <img src="images/3_1_gt.jpg" width="25%" />
+    <img src="Part-C/MSFD/1/img/000007.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation/000007_1.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation_kmeans_pred/000007_1.jpg" width="25%" />
 </p>
-[Results from K-means and ground truth mask for MSFD/1/000003.jpg]
+[Results from K-means and ground truth mask for MSFD/1/000007.jpg]
 
-
-We find that Region-growing technique is **sensitive to tolerance(the threshold difference for pixels be considered connected to seed). In cases where the tone of skin is comparable to that of face-mask, the tolerance needs to be drastically low to capture correct pixels.
 
 <p align="center">
-  <img src="images/58_1_rg.png" width="65%" />
-  <img src="images/58_1_gt.jpg" width="25%" />
+    <img src="Part-C/MSFD/1/img/000007.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation/000007_1.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation_Otsu_pred/000007_1.jpg" width="25%" />
 </p>
-[Results from region-growing and ground truth mask for MSFD/1/000058_1.jpg]
-
+[Results from Otsu and ground truth mask for MSFD/1/000007.jpg]
+<!-- 
 <p align="center">
-  <img src="images/7_1_rg.png" width="45%" />
-  <img src="images/7_1.png" width="45%" />
+    <img src="Part-C/MSFD/1/img/000007.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation/000007_1.jpg" width="25%" />
+  <img src="Part-C/MSFD/1/face_crop_segmentation_regiongrowing_pred/000007_1.jpg" width="25%" />
 </p>
+[Results from K-means and ground truth mask for MSFD/1/000007.jpg] -->
 
-[Results from region-growing and k-means for MSFD/1/000007_1.jpg. Less false-positives in Region-growing.]
 
-<p align="center">
-  <img src="images/13_1_rg.png" width="45%" />
-  <img src="images/13_1.png" width="45%" />
-</p>
-
-[Results from region-growing and k-means for MSFD/1/000013_1.jpg. Less false-positives in Region-growing.]
 
 In conclusion:
-| K-means | Region-growing |
+| K-means | Otsu |
 |--------|------------|
-| Slower| Relatively faster|
-| Highly likely to give false-positives (cases where mask tone matches hair, spectacle,etc)| Less likely to give false positives|
-| Sensitive to number of iterations| Sensitive to tolerance|
+| Higher IOU | Lower IOU|
+| Higher Dice Score | Lower Dice Score|
 
-Both the algorihtms rely on predefined parameters, they do not 'learn' and hence fail to generalise over large dataset (poor mean IoU and Dice scores). Computing mean IoU and Dice for K-means over 8500+ images is computationally expensive, moreover it is evident from its performance over random samples that its scores won't be significantly better region-growing.
-
-
-
+Both the algorihtms rely on predefined parameters, they do not 'learn' and hence fail to generalise over large dataset (poor mean IoU and Dice scores). Computing mean IoU and Dice for K-means over 8500+ images is computationally expensive, moreover it is evident from its performance over random samples that its scores won't be significantly better Otsu Thresholding.
 
 ---
 
@@ -281,7 +247,6 @@ This project focuses on implementing image segmentation techniques using both tr
 
 ## iii. Methodology
 ### *Traditional Segmentation (Part C)*
-- *Thresholding and Morphological Operations*: Basic segmentation based on pixel intensity.
 - *Region-Based Segmentation*: Methods such as flooding and binary closing were applied.
 - *K-Means Clustering*: Used to segment regions based on color similarity.
 
@@ -393,12 +358,14 @@ As we can see the unet model works much better than traditional methods
    
 3. Download the dataet from the source specified and put the 2 repositores dataset and MSFD at same directory level, immediately below repository level. Make directory output, command mkdir output. Final structure must look like :
     
-    .
+   ``` .
     ├── dataset
     ├── MSFD
     ├── output
     ├── scripts
     └── images
+
+    ```
     
     # Other files like README.md, pdf, etc are not shown in this tree.
     
@@ -412,5 +379,3 @@ As we can see the unet model works much better than traditional methods
 This project demonstrates the effectiveness of deep learning techniques for face mask detection and segmentation. CNN models outperform traditional classifiers for binary classification, while U-Net provides more precise segmentation results. Further improvements can be achieved by using more complex architectures and larger datasets.
 
 ---
-
---------------------------------------------------------------------------------------------------------
