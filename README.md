@@ -126,7 +126,7 @@ dataset
 
 For each image here we need to make a feature vector. We chose 2 features:  HoG and local binary patterns. 
 
-**Since feature vectors corresponding to images may be of different length, we resize all images and fix the length of individual sub-feature vectors, so that `np.hstack()` can work without interrupts when all individual sub-feature vectors ar combined into one vector for an image. The data used is the dataset. We train an XGBoost model, neural network and SVM, and as observed, the test accuracy of XGBoost is much better. This is attributed to the fact that neural networks need a lot of data to learn.
+Since feature vectors corresponding to images may be of different length, we resize all images and fix the length of individual sub-feature vectors, so that `np.hstack()` can work without interrupts when all individual sub-feature vectors ar combined into one vector for an image. The data used is the dataset. We train an XGBoost model, neural network and SVM, and as observed, the test accuracy of XGBoost is much better. This is attributed to the fact that neural networks need a lot of data to learn.
 
 ### PART B
 
